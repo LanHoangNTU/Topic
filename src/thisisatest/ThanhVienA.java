@@ -6,17 +6,21 @@
 package thisisatest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Lân
  */
 public class ThanhVienA implements Topic.ITopicListener{
-    private Topic t;
+    private List<String> list = new ArrayList<>();
+
+    public ThanhVienA() {
+    }
     
     public void dangKy(Topic t){
         t.themThanhVien(this);
-        this.t = t;
+        list.addAll(t.getList());
     }
     
     public void huyDangKy(Topic t){
@@ -24,16 +28,17 @@ public class ThanhVienA implements Topic.ITopicListener{
     }
 
     @Override
-    public void nhanThongBaoTinMoi() {
+    public void nhanThongBaoTinMoi(String tin) {
         System.out.println("Thanh vien A");
-        ArrayList<String> ds = t.getList();
-        System.out.println("Tin moi: " + ds.get(ds.size() - 1));
+        list.add(tin);
+        System.out.println("Tin moi: " + tin);
     }
 
     @Override
-    public void nhanThongBaoCapNhat(int i) {
+    public void nhanThongBaoCapNhat(int i, String tin) {
         System.out.println("Thanh vien A");
-        System.out.println("Tin cap nhat: " + t.getList().get(i));
+        list.set(i, tin);
+        System.out.println("Tin cap nhat(" + i +"): " + tin);
     }
     
 }

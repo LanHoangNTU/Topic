@@ -25,12 +25,16 @@ public class Topic {
     
     public void themMoi(String tin){
         list.add(tin);
-        guiThongBaoTinMoi();
+        for (int i = 0; i < listeners.size(); i++) {
+            listeners.get(i).nhanThongBaoTinMoi(tin);
+        }
     }
     
-    public void capNhat(int i, String tin){
-        list.set(i, tin);
-        guiThongBaoTinCapNhat(i);
+    public void capNhat(int index, String tin){
+        list.set(index, tin);
+        for (int i = 0; i < listeners.size(); i++) {
+            listeners.get(i).nhanThongBaoCapNhat(index, tin);
+        }
     }
     
     public void themThanhVien(ITopicListener listener){
@@ -41,20 +45,8 @@ public class Topic {
         listeners.remove(listener);
     }
     
-    public void guiThongBaoTinMoi(){
-        for (int i = 0; i < listeners.size(); i++) {
-            listeners.get(i).nhanThongBaoTinMoi();
-        }
-    }
-    
-    public void guiThongBaoTinCapNhat(int index){
-        for (int i = 0; i < listeners.size(); i++) {
-            listeners.get(i).nhanThongBaoCapNhat(index);
-        }
-    }
-    
     public static interface ITopicListener{
-        public void nhanThongBaoTinMoi();
-        public void nhanThongBaoCapNhat(int i);
+        public void nhanThongBaoTinMoi(String tb);
+        public void nhanThongBaoCapNhat(int i, String tb);
     }
 }

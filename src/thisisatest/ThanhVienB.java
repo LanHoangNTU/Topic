@@ -6,17 +6,18 @@
 package thisisatest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Lân
  */
 public class ThanhVienB implements Topic.ITopicListener{
-    private Topic t;
+    private List<String> list = new ArrayList<>();
     
     public void dangKy(Topic t){
         t.themThanhVien(this);
-        this.t = t;
+        list.addAll(t.getList());
     }
     
     public void huyDangKy(Topic t){
@@ -24,18 +25,20 @@ public class ThanhVienB implements Topic.ITopicListener{
     }
 
     @Override
-    public void nhanThongBaoTinMoi() {
+    public void nhanThongBaoTinMoi(String tin) {
         System.out.println("Thanh vien B");
-        for (int i = 0; i < t.getList().size() - 1; i++) {
-            System.out.println("Tin " + (i + 1) + ": " + t.getList().get(i));
+        for (int i = 0; i < list.size() - 1; i++) {
+            System.out.println("Tin " + (i + 1) + ": " + list.get(i));
         }
-        System.out.println("Tin moi: " + t.getList().get(t.getList().size() - 1));
+        list.add(tin);
+        System.out.println("Tin moi (" + list.size() + "): " + list.get(list.size() - 1));
     }
 
     @Override
-    public void nhanThongBaoCapNhat(int i) {
+    public void nhanThongBaoCapNhat(int i, String tin) {
         System.out.println("Thanh vien B");
-        System.out.println("Tin " + i + " duoc cap nhat: " + t.getList().get(i));
+        list.set(i, tin);
+        System.out.println("Tin " + (i + 1) + " duoc cap nhat: " + list.get(i));
     }
     
 }
